@@ -1,8 +1,12 @@
 package com.divashchenko;
 
+import java.util.Map;
+import java.util.TreeMap;
+
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
+
+        Map<String, Integer> map = new TreeMap<>();
     }
 }
