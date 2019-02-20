@@ -1,5 +1,8 @@
 package com.divashchenko;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
     private class TreeNode implements Comparable<TreeNode>{
@@ -17,6 +20,11 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         @Override
         public int compareTo(TreeNode o) {
             return ((Comparable) key).compareTo(o.key);
+        }
+
+        @Override
+        public String toString() {
+            return "[" + key + ", " + value + ']';
         }
     }
 
@@ -38,7 +46,25 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
     @Override
     public boolean containsValue(V value) {
+        List<TreeNode> list = new ArrayList<>();
+        addToList(root, list);
+
+        for (TreeNode node : list) {
+            if (node.value.equals(value)) {
+                return true;
+            }
+        }
+
         return false;
+    }
+
+    private void addToList(TreeNode root, List<TreeNode> list) {
+        if (root == null) {
+            return;
+        }
+        addToList(root.left, list);
+        list.add(root);
+        addToList(root.right, list);
     }
 
     @Override
@@ -104,18 +130,18 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
     }
 
 
-    private void addNode(TreeNode root, TreeNode node) {
+    private void addNode(TreeNode node, TreeNode root) {
         if (node.compareTo(root) < 0) {
             if (root.left == null)  {
                 root.left = node;
             } else {
-                addNode(root.left, node);
+                addNode(node, root.left);
             }
         } else if (node.compareTo(root) > 0) {
             if (root.right == null)  {
                 root.right = node;
             } else {
-                addNode(root.right, node);
+                addNode(node, root.right);
             }
         }
     }
@@ -130,4 +156,22 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         }
     }
 
+    @Override
+    public String toString() {
+        List<TreeNode> list = new ArrayList<>();
+        addToList(root, list);
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("[");
+
+        for (TreeNode node : list) {
+            sb.append(node.toString());
+            sb.append(", ");
+        }
+
+        sb.delete(sb.length() - 2, sb.length());
+        sb.append("]");
+
+        return sb.toString();
+    }
 }
