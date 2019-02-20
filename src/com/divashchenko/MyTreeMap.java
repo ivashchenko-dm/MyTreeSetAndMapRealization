@@ -32,7 +32,8 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+        checkKey(key);
+        return findNode(new TreeNode(key, null), root) != null;
     }
 
     @Override
@@ -42,11 +43,26 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
     @Override
     public V get(K key) {
-        return null;
+        checkKey(key);
+
+        TreeNode node = findNode(new TreeNode(key, null), root);
+        if (node != null) {
+            return node.value;
+        } else {
+            return null;
+        }
     }
 
     @Override
     public void put(K key, V value) {
+/*        try {
+            checkKey(key);
+        } catch (IllegalAccessException e) {
+            System.out.println("Wrong Key!");
+            return;
+        }*/
+
+        checkKey(key);
         if (root == null) {
             root = new TreeNode(key, value);
         } else {
@@ -54,7 +70,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
             if (tmp != null) {
                 tmp.value = value;
             } else {
-
+                addNode(new TreeNode(key, value), root);
             }
         }
 
@@ -64,6 +80,11 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
     @Override
     public int size() {
         return count;
+    }
+
+    @Override
+    public void remove() {
+
     }
 
     private TreeNode findNode(TreeNode node, TreeNode root) {
@@ -82,9 +103,31 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         }
     }
 
-    private void addNode(TreeNode root, TreeNode node) {
 
+    private void addNode(TreeNode root, TreeNode node) {
+        if (node.compareTo(root) < 0) {
+            if (root.left == null)  {
+                root.left = node;
+            } else {
+                addNode(root.left, node);
+            }
+        } else if (node.compareTo(root) > 0) {
+            if (root.right == null)  {
+                root.right = node;
+            } else {
+                addNode(root.right, node);
+            }
+        }
     }
 
+    private void checkKey(K key) {
+        if (!(key instanceof Comparable)) {
+            try {
+                throw new IllegalAccessException("Wrong key!");
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
 }
