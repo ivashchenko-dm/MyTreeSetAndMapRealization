@@ -2,7 +2,7 @@ package com.divashchenko;
 
 public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
-    private class TreeNode implements Comparable{
+    private class TreeNode implements Comparable<TreeNode>{
         K key;
         V value;
         TreeNode left;
@@ -13,9 +13,10 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
             this.value = value;
         }
 
+
         @Override
-        public int compareTo(Object o) {
-            return 0;
+        public int compareTo(TreeNode o) {
+            return ((Comparable) key).compareTo(o.key);
         }
     }
 
@@ -49,7 +50,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         if (root == null) {
             root = new TreeNode(key, value);
         } else {
-            TreeNode tmp = findNode(key, root);
+            TreeNode tmp = findNode(new TreeNode(key, value), root);
             if (tmp != null) {
                 tmp.value = value;
             } else {
@@ -65,14 +66,14 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         return count;
     }
 
-    private TreeNode findNode(K key, TreeNode node) {
-        if (node != null) {
-            if (node.key.equals(key)) {
-                return node;
+    private TreeNode findNode(TreeNode node, TreeNode root) {
+        if (root != null) {
+            if (root.compareTo(node) == 0) {
+                return root;
             } else {
-                TreeNode foundNode = findNode(key, node.left);
+                TreeNode foundNode = findNode(node, root.left);
                 if (foundNode == null) {
-                    foundNode = findNode(key, node.right);
+                    foundNode = findNode(node, root.right);
                 }
                 return foundNode;
             }
@@ -81,7 +82,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         }
     }
 
-    private void addNode(K key, V value) {
+    private void addNode(TreeNode root, TreeNode node) {
 
     }
 
