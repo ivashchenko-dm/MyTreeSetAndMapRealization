@@ -2,7 +2,7 @@ package com.divashchenko;
 
 public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
-    private class TreeNode {
+    private class TreeNode implements Comparable{
         K key;
         V value;
         TreeNode left;
@@ -11,6 +11,11 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         public TreeNode(K key, V value) {
             this.key = key;
             this.value = value;
+        }
+
+        @Override
+        public int compareTo(Object o) {
+            return 0;
         }
     }
 
