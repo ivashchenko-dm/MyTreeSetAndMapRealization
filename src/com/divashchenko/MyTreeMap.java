@@ -109,8 +109,45 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
     }
 
     @Override
-    public void remove() {
+    public void remove(K key) {
+        TreeNode tmp = new TreeNode(key, null);
+        root = removeNodeFromTree(root, tmp);
 
+    }
+
+    private TreeNode removeNodeFromTree(TreeNode root, TreeNode nodeToRemove) {
+        TreeNode node = root;
+
+        if (node == null) {
+            return null;
+        }
+
+        if (node.compareTo(nodeToRemove) > 0) {
+            node.left = removeNodeFromTree(node.left, nodeToRemove);
+        } else if (node.compareTo(nodeToRemove) < 0) {
+            node.right = removeNodeFromTree(node.right, nodeToRemove);
+        } else {
+            if (node.left == null && node.right == null) {
+                node = null;
+            } else if (node.right == null) {
+                node = node.left;
+            } else if (node.left == null) {
+                node = node.right;
+            } else {
+                TreeNode tmp = findMinRightNode(node.right);
+                node = tmp;
+                node.right = removeNodeFromTree(node.right, tmp);
+            }
+        }
+
+        return node;
+    }
+
+    private TreeNode findMinRightNode(TreeNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
     }
 
     private TreeNode findNode(TreeNode node, TreeNode root) {
