@@ -14,5 +14,5 @@ public interface MyTreeMapInterface<K, V> {
 
     int size();
 
-    void remove();
+    void remove(K key);
 }

@@ -24,8 +24,8 @@ public class MyTreeSet<T> implements MyTreeSetInterface<T> {
     }
 
     @Override
-    public boolean remove(T key) {
-        return false;
+    public void remove(T key) {
+        map.remove(key);
     }
 
     @Override

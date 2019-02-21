@@ -10,8 +10,8 @@ public interface MyTreeSetInterface<T> {
 
     boolean contains(T key);
 
-    boolean remove(T key);
+    void remove(T key);
 
     int size();
-    
+
 }
