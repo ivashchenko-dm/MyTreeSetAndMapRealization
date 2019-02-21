@@ -32,4 +32,16 @@ public class MyTreeSet<T> implements MyTreeSetInterface<T> {
     public int size() {
         return map.size();
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder(map.toString());
+
+        for (int i = 0; i < map.size(); i++) {
+            int index = sb.lastIndexOf("=");
+            sb.delete(index, index + 5);
+        }
+
+        return sb.toString();
+    }
 }
