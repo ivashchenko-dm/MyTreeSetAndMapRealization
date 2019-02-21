@@ -11,7 +11,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         TreeNode left;
         TreeNode right;
 
-        public TreeNode(K key, V value) {
+        private TreeNode(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -24,7 +24,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
         @Override
         public String toString() {
-            return "[" + key + ", " + value + ']';
+            return key + "=" + value;
         }
     }
 
@@ -162,7 +162,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         addToList(root, list);
         StringBuilder sb = new StringBuilder();
 
-        sb.append("[");
+        sb.append("{");
 
         for (TreeNode node : list) {
             sb.append(node.toString());
@@ -170,7 +170,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
         }
 
         sb.delete(sb.length() - 2, sb.length());
-        sb.append("]");
+        sb.append("}");
 
         return sb.toString();
     }
