@@ -34,6 +34,11 @@ public class Main {
         System.out.println("Contains value Jul? " + myTree.containsValue("Jul"));
         System.out.println();
 
+        System.out.println("Remove key 8!");
+        myTree.remove(8);
+        System.out.println(myTree);
+        System.out.println();
+
         System.out.println("Clear!");
         myTree.clear();
         System.out.println("Size: " + myTree.size());
