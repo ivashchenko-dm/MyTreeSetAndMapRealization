@@ -112,7 +112,7 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
     public void remove(K key) {
         TreeNode tmp = new TreeNode(key, null);
         root = removeNodeFromTree(root, tmp);
-
+        count--;
     }
 
     private TreeNode removeNodeFromTree(TreeNode root, TreeNode nodeToRemove) {
