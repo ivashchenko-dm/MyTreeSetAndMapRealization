@@ -1,7 +1,5 @@
 package com.divashchenko;
 
-import java.util.SortedMap;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -44,7 +42,6 @@ public class Main {
         myTree.clear();
         System.out.println("Size: " + myTree.size());
         System.out.println();
-
 
 
         // TreeSet

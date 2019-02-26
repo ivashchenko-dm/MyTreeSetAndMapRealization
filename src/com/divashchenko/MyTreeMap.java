@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
-    private class TreeNode implements Comparable<TreeNode>{
+    private class TreeNode implements Comparable<TreeNode> {
         K key;
         V value;
         TreeNode left;
@@ -81,13 +81,6 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
     @Override
     public void put(K key, V value) {
-/*        try {
-            checkKey(key);
-        } catch (IllegalAccessException e) {
-            System.out.println("Wrong Key!");
-            return;
-        }*/
-
         checkKey(key);
         if (root == null) {
             root = new TreeNode(key, value);
@@ -169,13 +162,13 @@ public class MyTreeMap<K, V> implements MyTreeMapInterface<K, V> {
 
     private void addNode(TreeNode node, TreeNode root) {
         if (node.compareTo(root) < 0) {
-            if (root.left == null)  {
+            if (root.left == null) {
                 root.left = node;
             } else {
                 addNode(node, root.left);
             }
         } else if (node.compareTo(root) > 0) {
-            if (root.right == null)  {
+            if (root.right == null) {
                 root.right = node;
             } else {
                 addNode(node, root.right);
